@@ -113,21 +113,21 @@ services:
   #
   # Agents
   #
-  test:
+  alice:
     image: indy-agentjs
     build:
       context: .
       dockerfile: agent.dockerfile
     command: "bash -c 'sleep 10; npm start'"
     environment:
-      - ICON_SRC=https://maxcdn.icons8.com/Share/icon/Users/person_female1600.png
+      - ICON_SRC=https://cdn1.iconfinder.com/data/icons/UrbanStories-png-Artdesigner-lv/256/Car_by_Artdesigner.lv.png
       - THEME=DarkGray
       - PORT=3000
-      - NAME=Test
+      - NAME=Alice
       - DL_NO=123-456-789
       - VEHICLE_ID=1234567
       - PASSWORD=123
-      - USERNAME=test
+      - USERNAME=alice
       - PUBLIC_DID_ENDPOINT=173.17.0.150:3000
       - RUST_LOG=${RUST_LOG}
       - TEST_POOL_IP=${TEST_POOL_IP}
@@ -150,7 +150,7 @@ services:
     image: indy-agentjs
     command: "bash -c 'sleep 10; npm start'"
     environment:
-      - ICON_SRC=http://www.clker.com/cliparts/g/l/R/7/h/u/teamstijl-person-icon-blue-hi.png
+      - ICON_SRC=https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/truck-front-01-512.png
       - THEME=BurlyWood
       - PORT=3001
       - NAME=Bob
@@ -168,7 +168,7 @@ services:
       - node2
       - node3
       - node4
-      - test
+      - alice
     networks:
       services:
         ipv4_address: 173.17.0.160
@@ -179,10 +179,10 @@ services:
     image: indy-agentjs
     command: "bash -c 'sleep 10; npm start'"
     environment:
-      - ICON_SRC=https://cdn2.iconfinder.com/data/icons/bubble-education-icons-1/360/School-512.png
+      - ICON_SRC=https://www.state.nj.us/mvc/2019-update/img/logo-no-tag.png
       - THEME=OliveDrab
       - PORT=3002
-      - NAME=Test Department of Motor Vehicles
+      - NAME=NJ Department of Motor Vehicles
       - DL_NO=NA
       - VEHICLE_ID=NA
       - PASSWORD=123
@@ -197,7 +197,7 @@ services:
       - node2
       - node3
       - node4
-      - test
+      - alice
     networks:
       services:
         ipv4_address: 173.17.0.170
@@ -226,7 +226,7 @@ services:
       - node2
       - node3
       - node4
-      - test
+      - alice
     networks:
       services:
         ipv4_address: 173.17.0.180
@@ -255,7 +255,7 @@ services:
       - node2
       - node3
       - node4
-      - test
+      - alice
     networks:
       services:
         ipv4_address: 173.17.0.190
