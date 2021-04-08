@@ -12,16 +12,17 @@ const config = {
     port: process.env.PORT || 3000,
 
     // Optional: Give your wallet a unique name
-    walletName: `${process.env.USERNAME || 'test'}_wallet`,
+    walletName: `${process.env.USERNAME || 'alice'}_wallet`,
 
     // Optional: Give your pool config a unique name
     poolName: process.env.POOL_NAME || 'pool1',
 
-    // This information is used to issue your "Government ID"
+    // This information is used to issue your "Vehicle ID"
     userInformation: {
-        name: process.env.NAME || 'Test Vehicle',
-        DL: process.env.DL_NO || '123-456-789',
-        VIN: process.env.VEHICLE_ID || '1234567',
+        Name: process.env.NAME || 'Alice',
+        Type: process.env.TYPE || 'Vehicle',
+        VIN: process.env.VEHICLE_ID || 'GA3GFKV43MVJ42872',
+	Model: process.env.MODEL || 'Nissan',
         icon_src: process.env.ICON_SRC || 'https://cdn3.iconfinder.com/data/icons/black-easy/512/538738-school_512x512.png',
         username: process.env.USERNAME || 'test',
         password: process.env.PASSWORD || '123'

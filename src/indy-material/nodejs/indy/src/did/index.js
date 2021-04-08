@@ -105,8 +105,8 @@ async function setupSteward() {
 }
 
 async function issueGovernmentIdCredential() {
-    let schemaName = 'Government-ID';
-    let schemaVersion = '1.1';
+    let schemaName = 'VehicleCredential';
+    let schemaVersion = '1.0';
     let signatureType = 'CL';
     let govIdSchema;
     let govIdSchemaId = `${stewardDid}:2:${schemaName}:${schemaVersion}`;
@@ -114,9 +114,10 @@ async function issueGovernmentIdCredential() {
         govIdSchema = await indy.issuer.getSchema(govIdSchemaId);
     } catch(e) {
         [govIdSchemaId, govIdSchema] = await sdk.issuerCreateSchema(stewardDid, schemaName, schemaVersion, [
-            'name',
-            'DL',
-            'VIN'
+            'Name',
+            'Type',
+            'VIN',
+	    'Model'
         ]);
 
         await indy.issuer.sendSchema(await indy.pool.get(), stewardWallet, stewardDid, govIdSchema);
@@ -135,9 +136,10 @@ async function issueGovernmentIdCredential() {
 
 
     let govIdValues = {
-        name: {"raw": config.userInformation.name, "encoded": indy.credentials.encode(config.userInformation.name)},
-        DL: {"raw": config.userInformation.DL, "encoded": indy.credentials.encode(config.userInformation.DL)},
-        VIN: {"raw": config.userInformation.VIN, "encoded": indy.credentials.encode(config.userInformation.VIN)}
+        Name: {"raw": config.userInformation.Name, "encoded": indy.credentials.encode(config.userInformation.Name)},
+        Type: {"raw": config.userInformation.Type, "encoded": indy.credentials.encode(config.userInformation.Type)},
+        VIN: {"raw": config.userInformation.VIN, "encoded": indy.credentials.encode(config.userInformation.VIN)},
+        Model: {"raw": config.userInformation.Model, "encoded": indy.credentials.encode(config.userInformation.Model)},
     };
 
     let [govIdCredential] = await sdk.issuerCreateCredential(stewardWallet, govIdCredOffer, govIdCredRequest, govIdValues);
