@@ -77,16 +77,17 @@
             <h3>Create Schema: </h3>
             <form method="POST" action="/api/issuer/create_schema">
                 <label>Name of Schema: </label>
-                <input type="text" class="w3-input" name="name_of_schema" value="Transcript">
+                <input type="text" class="w3-input" name="name_of_schema" value="VehicleCredential">
                 <br><br>
                 <label>Schema Version: </label>
-                <input type="text" class="w3-input" name="version" value="1.2">
+                <input type="text" class="w3-input" name="version" value="1.0">
                 <br><br>
                 <label>Please supply a JSON array of attributes:</label><br><br>
                 <textarea style="height:220px;" class="w3-input" name="attributes" required>[
     "name",
-    "dl_number",
-    "vin"
+    "type",
+    "vin",
+    "model"
 ]</textarea>
                 <br><br>
                 <input class="w3-btn w3-white w3-border" type="submit">
@@ -105,7 +106,7 @@
                     </select>
                     <br><br>
                     <label>Tag:</label>
-                    <input class="w3-input" type="text" name="tag" value="MyTranscript" required>
+                    <input class="w3-input" type="text" name="tag" value="MyVehicleCredential" required>
                     <br><br>
                     <input class="w3-btn w3-white w3-border" type="submit">
                 </form>
@@ -158,9 +159,14 @@
         </div>
         <div class="w3-half w3-right">
             <form class="w3-container w3-card-4 w3-padding" onsubmit="sendSovrinMessage('urn:sovrin:agent:message_type:sovrin.org/ui/send_message', this)">
-                <div class="w3-section">
-                    Recipient: <input id="send_message_form_did" class="w3-input" type="text" name="did" value="<%=endpointDid%>">
-                </div>
+		<div>
+                <select class="w3-select" id="send_message_form_did" name="did" required>
+                            Recipient: 
+                        <%for(let relationship of relationships) {%>
+                        <option value="<%=relationship.metadata.theirEndpointDid%>"><%=relationship.metadata.name%></option>
+                        <%}%>
+		</select>
+		</div>
                 <div class="w3-section">
                     Message: <textarea id="send_message_form_message" class="w3-input" name="message" rows="6" >{
     "type":"SOME_TYPE",
